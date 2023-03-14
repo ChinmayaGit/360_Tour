@@ -172,7 +172,7 @@ var controlItemCube = {
 viewer.appendControlItem(controlItemCube);
 ```
 
-##  custom floating 2d Item
+##  Custom floating 2d Item
 ```
 var posterInfospot = new PANOLENS.Infospot(2000, 'https://images-na.ssl-images-amazon.com/images/I/91nELBuo3kL._RI_SX200_.jpg');
 posterInfospot.position.set(-4774.9, 474.16, -1375.02);
