@@ -40,53 +40,56 @@ progressElement = document.getElementById("progress");
 progressContainer = document.getElementById("progress_container");
 
 function onEnter(event) {
-
   progressContainer.classList.remove("hide");
   progressContainer.classList.add("show");
   progressElement.style.width = 0;
   progressElement.classList.remove("finish");
-
-  console.log("entered");
 }
 
 function onProgress(event) {
-  onEnter("enter");
   progress = (event.progress.loaded / event.progress.total) * 100;
   progressElement.style.width = progress + "%";
   if (progress === 100) {
     progressElement.classList.add("finish");
     setTimeout(function () {
-      progressContainer.classList.remove("show");
-      progressContainer.classList.add("hide");
+      hideLoading();
     }, 500);
   }
-
-  console.log(progress);
-
 }
+
+const hideLoading = () => {
+  progressContainer.classList.remove("show");
+  progressContainer.classList.add("hide");
+};
 
 container = document.querySelector(".image-container");
 
 panorama1 = new PANOLENS.ImagePanorama("images/4.jpg");
 panorama1.addEventListener("progress", onProgress);
-// panorama1.addEventListener("enter", onEnter);
+panorama1.addEventListener("enter", onEnter);
 panorama1.addEventListener("enter-fade-start", function () {
   viewer.tweenControlCenter(lookAtPositions[0], 0);
 });
 
 panorama2 = new PANOLENS.ImagePanorama("images/5.jpg");
 panorama2.addEventListener("progress", onProgress);
-// panorama2.addEventListener("enter", onEnter);
+panorama2.addEventListener("enter", onEnter);
 panorama2.addEventListener("enter", function () {
   viewer.tweenControlCenter(lookAtPositions[0], 0);
 });
 
 panorama3 = new PANOLENS.ImagePanorama("images/6.jpg");
 panorama3.addEventListener("progress", onProgress);
-// panorama3.addEventListener("enter", onEnter);
+panorama3.addEventListener("enter", onEnter);
 panorama3.addEventListener("enter", function () {
   viewer.tweenControlCenter(lookAtPositions[0], 0);
 });
+
+// ==============================
+panorama1.addEventListener("enter-fade-start", hideLoading);
+panorama2.addEventListener("enter-fade-start", hideLoading);
+panorama3.addEventListener("enter-fade-start", hideLoading);
+// ==============================
 
 panorama1.link(panorama2, infospotPositions[0]);
 panorama2.link(panorama3, infospotPositions[0]);
