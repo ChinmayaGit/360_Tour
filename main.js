@@ -1,28 +1,19 @@
-// const panoramaImage = new PANOLENS.ImagePanorama("images/PXL.jpg");
-// const imageContainer = document.querySelector(".image-container");
+var 
+  panorama,
 
-// const viewer = new PANOLENS.Viewer({
-//   container: imageContainer,
-//   autoRotate: false,
-//   autoRotateSpeed: 0.3,
-//   controlBar: false,
-// });
+  placeOne,
+  placeTwo,
+  placeThree,
 
-// viewer.add(panoramaImage);
-// function onButtonClick(targetPanorama) {
-// 	bar.classList.remove('hide');
-// 	viewer.setPanorama(targetPanorama);
-// }
-
-var panorama1,
-  panorama2,
-  panorama3,
   viewer,
   container,
+
+  info,
   infospot,
-  infospotTwo,
-  infospotThree,
-  infospotFour,
+  infoTwo,
+  infoThree,
+  infoFour,
+
   progress,
   progressElement;
 
@@ -57,6 +48,38 @@ function onProgress(event) {
   }
 }
 
+
+function createPanoramaImage(path) {
+  const panorama = new PANOLENS.ImagePanorama(path);
+  panorama.addEventListener("progress", onProgress);
+  panorama.addEventListener("enter", onEnter);
+  panorama.addEventListener("enter", 
+  function () {
+    viewer.tweenControlCenter(lookAtPositions[0], 0);
+  });
+  return panorama;
+}
+
+function createPanoramaVideo(path) {
+  const panorama = new PANOLENS.VideoPanorama(path);
+  panorama.addEventListener("progress", onProgress);
+  panorama.addEventListener("enter", onEnter);
+  panorama.addEventListener("enter", 
+  function () {
+    viewer.tweenControlCenter(lookAtPositions[0], 0);
+  });
+  return panorama;
+}
+
+
+function infoButton(text,x,y,z) {
+  infospot = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);
+  infospot.position.set(x, y, z);
+  infospot.addHoverText(text, 30);
+  return infospot;
+}
+
+
 const hideLoading = () => {
   progressContainer.classList.remove("show");
   progressContainer.classList.add("hide");
@@ -64,87 +87,105 @@ const hideLoading = () => {
 
 container = document.querySelector(".image-container");
 
-panorama1 = new PANOLENS.ImagePanorama("images/4.jpg");
-panorama1.addEventListener("progress", onProgress);
-panorama1.addEventListener("enter", onEnter);
-panorama1.addEventListener("enter-fade-start", function () {
-  viewer.tweenControlCenter(lookAtPositions[0], 0);
+// Creating Place
+placeOne = createPanoramaImage("images/4.jpg");
+placeTwo = createPanoramaImage("images/5.jpg");
+placeThree = createPanoramaImage("images/6.jpg");
+placeFour = createPanoramaVideo("images/ClashofClans.mp4");
+
+
+//Loading
+placeOne.addEventListener("enter", hideLoading);
+placeTwo.addEventListener("enter", hideLoading);
+placeThree.addEventListener("enter", hideLoading);
+
+// Linking 
+placeOne.link(placeTwo, infospotPositions[0]);
+placeTwo.link(placeThree, infospotPositions[0]);
+placeThree.link(placeFour, infospotPositions[0]);
+placeFour.link(placeOne, infospotPositions[0]);
+
+// InfoButton
+infoOne=infoButton("Cube", 7000, -2000, 3700);
+infoOne.addEventListener("click", () => {
+  if (cube.visible == true) {
+    cube.visible = false;
+  } else {
+    cube.visible = true;
+  }
 });
+infoTwo=infoButton("Sofa", 2500, -3000, -6000);
+infoThree=infoButton("Panting", 2000, -2000, 3700);
+infoFour=infoButton("Broken Socket", 5500, 0000, -0000);
 
-panorama2 = new PANOLENS.ImagePanorama("images/5.jpg");
-panorama2.addEventListener("progress", onProgress);
-panorama2.addEventListener("enter", onEnter);
-panorama2.addEventListener("enter", function () {
-  viewer.tweenControlCenter(lookAtPositions[0], 0);
-});
+// Adding Info Button
+placeOne.add(infoOne);
+placeOne.add(infoTwo);
+placeOne.add(infoThree);
+placeTwo.add(infoFour);
 
-panorama3 = new PANOLENS.ImagePanorama("images/6.jpg");
-panorama3.addEventListener("progress", onProgress);
-panorama3.addEventListener("enter", onEnter);
-panorama3.addEventListener("enter", function () {
-  viewer.tweenControlCenter(lookAtPositions[0], 0);
-});
 
-// ==============================
-panorama1.addEventListener("enter-fade-start", hideLoading);
-panorama2.addEventListener("enter-fade-start", hideLoading);
-panorama3.addEventListener("enter-fade-start", hideLoading);
-// ==============================
+// var video = document.createElement( 'video' );
+// video.src = 'images/video.mp4';
 
-panorama1.link(panorama2, infospotPositions[0]);
-panorama2.link(panorama3, infospotPositions[0]);
-panorama3.link(panorama1, infospotPositions[0]);
+// // create a video hotspot
+// var videoHotspot = new PANOLENS.Hotspot();
+// videoHotspot.addVideo( video, 720, 480 );
 
-// infospot = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);
-// infospot.position.set(2000, 0000, -6000);
-// infospot.addHoverText("Blazer", 30);
+// // add the video hotspot to the panorama
+// placeOne.add( videoHotspot );
 
-// infospotTwo = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);
-// infospotTwo.position.set(2500, -3000, -6000);
-// infospotTwo.addHoverText("Bucket", 30);
 
-// infospotThree = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);
-// infospotThree.position.set(7000, -2000, 3700);
-// infospotThree.addHoverText("Broken Socket", 30);
+// // create a custom button
+// var myButton = new PANOLENS.Button();
+// myButton.addEventListener( 'click', function(){
+//     // do something when the button is clicked
+// });
 
-// infospotFour = new PANOLENS.Infospot(350, PANOLENS.DataImage.Info);
-// infospotFour.position.set(5500, 0000, -0000);
-// infospotFour.addHoverText("Broken Socket", 30);
+// // customize the button's appearance
+// myButton.container.style.background = 'blue';
+// myButton.container.style.borderRadius = '50%';
+// myButton.container.style.width = '50px';
+// myButton.container.style.height = '50px';
 
-// panorama1.add(infospot);
-// panorama1.add(infospotTwo);
-// panorama1.add(infospotFour);
-// panorama2.add(infospotThree);
+// // add the button to the viewer
+// viewer.addControl( myButton );
+// placeOne.add(myButton);
 
+
+
+// Creating Viewer
 viewer = new PANOLENS.Viewer({
   output: "console",
   container: container,
   controlBar: true,
 });
-viewer.add(panorama1, panorama2, panorama3);
 
-// // Cube custom item
-// var cube = new THREE.Mesh(
-//   new THREE.BoxGeometry(100, 100, 100),
-//   new THREE.MeshNormalMaterial()
-// );
-// cube.position.set(-300, 100, 100);
-// viewer.addUpdateCallback(function () {
-//   cube.rotation.y += 0.05;
-//   cube.rotation.x += 0.02;
-// });
-// panorama1.add(cube);
+viewer.add(placeOne, placeTwo, placeThree, placeFour);
 
-// var controlItemCube = {
-//   style: {
-//     backgroundImage: "url(http://i40.tinypic.com/1531w79.jpg)",
-//   },
+// Cube custom item
+var cube = new THREE.Mesh(
+  new THREE.BoxGeometry(100, 100, 100),
+  new THREE.MeshNormalMaterial()
+);
+cube.position.set(-300, 100, 100);
+viewer.addUpdateCallback(function () {
+  cube.rotation.y += 0.05;
+  cube.rotation.x += 0.02;
+});
+placeOne.add(cube);
 
-//   onTap: function () {
-//     viewer.tweenControlCenterByObject(cube);
-//   },
-// };
-// viewer.appendControlItem(controlItemCube);
+var controlItemCube = {
+  style: {
+    backgroundImage: "url(http://i40.tinypic.com/1531w79.jpg)",
+  },
+
+  onTap: function () {
+    viewer.tweenControlCenterByObject(cube);
+  },
+};
+
+viewer.appendControlItem(controlItemCube);
 
 // // Wonder women custom item
 // var posterInfospot = new PANOLENS.Infospot(
@@ -167,18 +208,22 @@ viewer.add(panorama1, panorama2, panorama3);
 // };
 // viewer.appendControlItem(controlItemPoster);
 
-// // Video control item
-// var controlItemVideoGroup = {
-//   style: {
-//     backgroundImage:
-//       "url(https://images-na.ssl-images-amazon.com/images/I/91ovrqFkzkL._RI_SX200_.jpg)",
-//     float: "left",
-//   },
+// Video control item
+var controlItemVideoGroup = {
+  style: {
+    backgroundImage:
+      "url(https://images-na.ssl-images-amazon.com/images/I/91ovrqFkzkL._RI_SX200_.jpg)",
+    float: "left",
+  },
 
-//   onTap: function () {
-//     viewer.setPanorama(panorama);
-//   },
+  onTap: function () {
 
-//   group: "video",
-// };
-// viewer.appendControlItem(controlItemVideoGroup);
+    viewer.setPanorama(placeFour);
+    
+  },
+
+  // group: "video",
+};
+viewer.appendControlItem(controlItemVideoGroup);
+
+
