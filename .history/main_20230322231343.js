@@ -118,7 +118,10 @@ infoOne.addEventListener("click", () => {
 });
 infoTwo=infoButton("Sofa", 500, 500, -2000);
 infoThree=infoButton("Panting", 4000, -2800, 6500);
-infoFour=infoButton("Broken Socket", 5500, 0000, -0000);
+// infoFour=infoButton("Broken Socket", 5500, 0000, -0000);
+
+// infoFive=infoButton("Video", 7000, -500, 500);
+// infoFive.addHoverElement( document.getElementById( 'desc-container' ), 200 );
 
 infoFive = new PANOLENS.Infospot( 300, PANOLENS.DataImage.Info );
 infoFive.position.set( 7000, -500, 500 );
@@ -130,6 +133,36 @@ placeOne.add(infoTwo);
 placeOne.add(infoThree);
 placeOne.add(infoFive);
 // placeTwo.add(infoFour);
+
+
+
+
+// // create a custom button
+
+// var infospotTwo = new PANOLENS.Infospot( 100, "images/button.png" );
+// infospotTwo.position.set( 0, 0, -1000 );
+// // infospot.scale.set( 2, 2 );
+// // infospot.material.color.set( 0xff0000 );
+// infospotTwo.addHoverElement( document.getElementById( 'infospotTwo' ), 200 );
+
+// // Add the Infospot to the scene
+// placeOne.add( infospotTwo );
+
+
+// videoOne= new PANOLENS.Media({ video: { width: { ideal: 1920 }, height: { ideal: 1080 }, facingMode: { exact: 'environment' } }, audio: false })
+// videoOne.createVideoElement()
+
+//  videoOne.getUserMedia(
+
+//  ).then(stream => {
+//    videoOne.setMediaStream(stream)
+//     videoOne.play()
+//   })
+// placeOne.add(videoOne)
+
+
+
+
 
 // Creating Viewer
 viewer = new PANOLENS.Viewer({

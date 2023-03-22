@@ -1,0 +1,8 @@
+Redesign the loading ui, beautify it
+Loading message 
+- animation slied up down
+- 4 variant 
+
+load all images 1st
+
+Write proper documentation for the complete project

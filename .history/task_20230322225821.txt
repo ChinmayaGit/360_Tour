@@ -1,0 +1,5 @@
+Loading message 
+- animation slied up down
+- 4 variant 
+
+load all images 1st

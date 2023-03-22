@@ -1,0 +1,15 @@
+Redesign the loading ui, beautify it
+Loading message 
+- animation slied up down spin etc.
+- 4 variant 
+
+Load all images in cache memory
+
+Add 3d models
+
+create
+ - global file
+ - each file for each function
+
+Write proper documentation for the complete project
+
