@@ -253,12 +253,12 @@ css
 }
 ```
 
-## customize icon buttom
+## Customize icon buttom
 ```
   infospot = new PANOLENS.Infospot(350, "images/button.png");
 ```
 
-## get x,y,z posion by clicking
+## Get x,y,z posion by clicking
 added it at the end of the code.
 ```
 window.addEventListener(
