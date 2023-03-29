@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Room</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+
+    <div class="main-container">
+      <div class="container"></div>
+    </div>
+    
+    <div id="progress_container">
+      <div id="progress" style="width: 0px" class=""></div>
+    </div>
+    <!-- ============================================ -->
+    <div id="desc-container" style="display:none">
+      <!-- <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ"></iframe> -->
+
+      <video width="320" height="240" autoplay>
+        <source src="videos/Rick.mp4" type="video/mp4" >
+      </video>  
+      <div class="title">(Official Music Video)</div>
+      <div class="text">Rick Astley - Never Gonna Give You Up</div>
+    </div>
+
+    <!-- ============================================ -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/three.js/105/three.min.js"
+      integrity="sha512-uWKImujbh9CwNa8Eey5s8vlHDB4o1HhrVszkympkm5ciYTnUEQv3t4QHU02CUqPtdKTg62FsHo12x63q6u0wmg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script> 
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.150.1/three.module.js"></script> -->
+    <script src="js/panolens.min.js"></script>
+    <script src="/main.js"></script>
+    <script type="module" src="loading.js"></script>
+  </body>
+</html>

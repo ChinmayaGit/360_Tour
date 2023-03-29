@@ -1,0 +1,21 @@
+Fix the loading (after creating function for createPanoramaImage loading not working)
+
+Redesign the loading ui, beautify it
+Loading message 
+- animation slied up down spin etc.
+- 4 variant 
+
+Load all images in cache memory
+
+create
+ - global file
+ - each file for each function
+
+Give the x,y,z coordinate point when touch any where.
+
+
+keep it on hold:-
+------------------
+Add 3d models
+
+Write proper documentation for the complete project
