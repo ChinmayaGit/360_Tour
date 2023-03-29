@@ -191,7 +191,7 @@ var controlItemPoster = {
 viewer.appendControlItem(controlItemPoster);
 ```
 
-##  Video control item
+## 360 Video control item
 ```
 var controlItemVideoGroup = {
   style: {
@@ -208,4 +208,62 @@ var controlItemVideoGroup = {
 viewer.appendControlItem(controlItemVideoGroup);
 ```
 
+## Add Video
 
+js
+```
+infospotFour = new PANOLENS.Infospot( 300, "images/video.png");
+infospotFour.position.set( 5000, -2000, 800 );
+infospotFour.addHoverElement( document.getElementById( 'desc-container' ), 300 );
+```
+html
+```
+    <div id="desc-container" style="display:none">
+      <iframe
+        id="myVideo"
+        width="960"
+        height="315"
+        src="https://www.youtube.com/embed/35npVaFGHMY"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+      <div class="title">(Nature)</div>
+  
+    </div>
+```
+css
+```
+#desc-container {
+  max-width: 500px;
+  max-height: 500px;
+  min-width: 200px;
+  min-height: 250px;
+  background: #fff;
+  color: #000;
+  border-radius: 3px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+#desc-container > iframe {
+  border: none;
+  width:100%;
+}
+```
+
+## customize icon buttom
+```
+  infospot = new PANOLENS.Infospot(350, "images/button.png");
+```
+
+## get x,y,z posion by clicking
+added it at the end of the code.
+```
+window.addEventListener(
+  "click",
+  () => viewer.outputPosition(),
+  false
+);
+```
